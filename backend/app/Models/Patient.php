@@ -1,38 +1,23 @@
-use App\Models\Patient;
-use Illuminate\Database\Seeder;
+<?php
 
-class PatientSeeder extends Seeder
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Patient extends Model
 {
-    public function run()
-    {
-        $patients = [
-            [
-                'first_name' => 'Zyrell',
-                'last_name' => 'Trinidad',
-                'date_of_birth' => '2002-01-15',
-                'gender' => 'male',
-                'address' => '123 Main St, City, Country',
-                'phone' => '1234567890',
-                'email' => 'zyrell@gmail.com',
-                'emergency_contact' => 'Josh Trinidad',
-                'medical_history' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-            ],
- [
-                'first_name' => 'Zyrell',
-                'last_name' => 'Trinidad',
-                'date_of_birth' => '2002-01-15',
-                'gender' => 'male',
-                'address' => '123 Main St, City, Country',
-                'phone' => '1234567890',
-                'email' => 'zyrell@gmail.com',
-                'emergency_contact' => 'Josh Trinidad',
-                'medical_history' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-            ]
-            
-        ];
+    use HasFactory;
 
-        foreach ($patients as $patientData) {
-            Patient::create($patientData);
-        }
-    }
+    protected $fillable = [
+        'first_name',
+        'last_name',
+        'date_of_birth',
+        'gender',
+        'address',
+        'phone',
+        'email',
+        'emergency_contact',
+        'medical_history',
+    ];
 }
