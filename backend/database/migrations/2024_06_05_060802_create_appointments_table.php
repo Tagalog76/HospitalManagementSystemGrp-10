@@ -10,8 +10,8 @@ class CreateAppointmentsTable extends Migration
     {
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('patient_id')->constrained('patients')->onDelete('cascade');
-            $table->foreignId('doctor_id')->constrained('doctors')->onDelete('cascade');
+            $table->foreignId('patient_id')->references('patient_id')->on('patients');
+            $table->foreignId('doctor_id')->references('doctor_id')->on('doctors');
             $table->dateTime('appointment_date');
             $table->text('remarks')->nullable();
             $table->timestamps();
