@@ -16,19 +16,11 @@ return new class extends Migration
         Schema::create('doctors', function (Blueprint $table) {
             $table->id();
             $table->string('first_name');
-<<<<<<< Updated upstream
-            $table->last_name();
-            $table->specialization();
-            $table->license_number();
-            $table->phone();
-            $table->email();
-=======
             $table->string('last_name');
             $table->string('specialization');
-            $table->int('license_number');
-            $table->int('phone');
-            $table->email('email');
->>>>>>> Stashed changes
+            $table->integer('license_number');
+            $table->integer('phone');
+            $table->string('email')->unique();
             $table->timestamps();
         });
     }
