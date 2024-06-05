@@ -38,4 +38,9 @@ class Doctors extends Controller
     }
 
     //for deleting doctors
+    public function delete($id)
+    {
+        Doctor::find($id)->delete();
+        return response()->json(['message' => 'Doctor deleted successfully']);
+    }
 }
