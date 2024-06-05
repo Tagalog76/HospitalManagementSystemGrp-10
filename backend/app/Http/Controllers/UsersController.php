@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User; // Assuming you have a User model
+use App\Models\Users; // Assuming you have a User model
 
-class UserController extends Controller
+class UsersController extends Controller
 {
     // Method to fetch all users
     public function index()
