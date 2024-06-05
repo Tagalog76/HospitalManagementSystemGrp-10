@@ -8,12 +8,12 @@ class Doctors extends Controller
 {
     public function index()
     {
-        return Doctor::all();
+        return Doctors::all();
     }
 
     public function show($id)
     {
-        return Doctor::find($id);
+        return Doctors::find($id);
     }
 
     //for adding doctors
@@ -27,12 +27,12 @@ class Doctors extends Controller
             'phone' => 'required|int|max:11',
             'email' => 'required|email|max:255',
         ]);
-        return Doctor::create($request->all());
+        return Doctors::create($request->all());
     }
     //for updating doctors
     public function update(Request $request, $id)
     {
-        $doctor = Doctor::findOrFail($id);
+        $doctor = Doctors::findOrFail($id);
         $doctor->update($request->all());
         return $doctor;
     }
