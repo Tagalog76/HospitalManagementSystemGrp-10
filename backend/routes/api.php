@@ -8,7 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\DoctorsController;
 
 Route::middleware('auth:api')->group(function () {
-    
+
 });
 
 
@@ -16,5 +16,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('appointments', Appointments::class);
-Route::apiResource('users', Users::class);
+Route::apiResource('appointments', AppointmentsController::class);
+Route::apiResource('users', UsersController::class);
