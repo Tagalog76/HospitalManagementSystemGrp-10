@@ -4,7 +4,7 @@
     use Illuminate\Http\Request;
     use App\Models\Appointment;
     
-    class AppointmentController extends Controller
+    class AppointmentsController extends Controller
     {
         public function index()
         {

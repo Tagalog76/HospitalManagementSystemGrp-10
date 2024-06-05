@@ -6,11 +6,13 @@ use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\UserController;
 
 Route::middleware('auth:api')->group(function () {
-    Route::apiResource('appointments', AppointmentController::class);
-    Route::apiResource('users', UserController::class);
+    
 });
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::apiResource('appointments', Appointments::class);
+Route::apiResource('users', Users::class);
