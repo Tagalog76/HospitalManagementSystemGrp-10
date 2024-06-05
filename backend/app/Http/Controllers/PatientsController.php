@@ -24,7 +24,7 @@ class PatientsController extends Controller
         ]);
 
         // Create new patient
-        $patient = Patients::create($validatedData);
+        $patient = PatientsController::create($validatedData);
 
         // Return response
         return response()->json(['message' => 'Patient created successfully', 'data' => $patient], 201);
@@ -34,7 +34,7 @@ class PatientsController extends Controller
     public function update(Request $request, $id)
     {
         // Find patient by ID
-        $patient = Patients::findOrFail($id);
+        $patient = PatientsController::findOrFail($id);
 
         // Validate request data
         $validatedData = $request->validate([
