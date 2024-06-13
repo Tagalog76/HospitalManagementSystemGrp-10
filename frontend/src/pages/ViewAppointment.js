@@ -4,7 +4,6 @@ const ViewAppointments = () => {
   return (
     <div>
       <h2>View Appointments</h2>
-      {/* View Appointments UI */}
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Home from './pages/Home.js/index.js';
+import Home from './pages/Home.js';
 import Register from './components/Register.js';
 import Login from './components/Login';
 import AdminDashboard from './components/AdminDashboard';
@@ -10,25 +10,26 @@ import PatientDashboard from './components/PatientDashboard';
 import ManagePatients from './pages/ManagePatients';
 import ManageDoctors from './pages/ManageDoctors';
 import BookAppointment from './pages/BookAppointment';
-import ViewAppointments from './pages/ViewAppointments';
+import ViewAppointments from './pages/ViewAppointment.js';
 
 const App = () => {
   return (
     <Router>
-      <Navbar />
-      <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/register" component={Register} />
-        <Route path="/login" component={Login} />
-        <Route path="/admin" exact component={AdminDashboard} />
-        <Route path="/doctor" exact component={DoctorDashboard} />
-        <Route path="/patient" exact component={PatientDashboard} />
-        <Route path="/admin/manage-patients" component={ManagePatients} />
-        <Route path="/admin/manage-doctors" component={ManageDoctors} />
-        <Route path="/doctor/view-appointments" component={ViewAppointments} />
-        <Route path="/patient/book-appointment" component={BookAppointment} />
-        <Route path="/patient/view-appointments" component={ViewAppointments} />
-      </Switch>
+      <div>
+        <Navbar />
+        <Route>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/admin-dashboard" element={<AdminDashboard />} />
+          <Route path="/doctor-dashboard" element={<DoctorDashboard />} />
+          <Route path="/patient-dashboard" element={<PatientDashboard />} />
+          <Route path="/book-appointment" element={<BookAppointment />} />
+          <Route path="/manage-doctors" element={<ManageDoctors />} />
+          <Route path="/manage-patients" element={<ManagePatients />} />
+          <Route path="/view-appointment" element={<ViewAppointments />} />
+        </Route>
+      </div>
     </Router>
   );
 };
