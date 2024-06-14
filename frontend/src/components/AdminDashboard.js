@@ -6,8 +6,8 @@ const AdminDashboard = () => {
     <div>
       <h2>Admin Dashboard</h2>
       <ul>
-        <li><Link to="/admin/manage-patients">Manage Patients</Link></li>
-        <li><Link to="/admin/manage-doctors">Manage Doctors</Link></li>
+        <li><Link to="/pages/ManagePatients">Manage Patients</Link></li>
+        <li><Link to="/pages/ManageDoctors">Manage Doctors</Link></li>
       </ul>
     </div>
   );
