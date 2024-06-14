@@ -8,8 +8,13 @@ use App\Models\Records;
 
 class PatientsController extends Controller
 {
+    public function listPatients()
+    {
+        return Patients::all();
+    }
+
     // Method to add a new patient
-    public function addPatient(Request $request)
+    public function store(Request $request)
     {
         // Validate request data
         $validatedData = $request->validate([
@@ -32,7 +37,7 @@ class PatientsController extends Controller
     }
 
     // Method to update an existing patient
-    public function updatePatient(Request $request, $id)
+    public function update(Request $request, $id)
     {
         // Find patient by ID
         $patient = Patients::findOrFail($id);

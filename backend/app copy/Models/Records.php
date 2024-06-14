@@ -5,17 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Appointments extends Model
+class Records extends Model
 {
     use HasFactory;
-
     protected $fillable = [
-        'patient_id', 
-        'doctor_id', 
-        'appointment_date', 
-        'remarks'
+        'patient_id',
+        'doctor_id',
+        'visit_date',
+        'diagnosis',
+        'treatment',
+        'notes',
     ];
 
+    // Define relationships (assuming you have Patient and Doctor models)
     public function patient()
     {
         return $this->belongsTo(Patients::class);
