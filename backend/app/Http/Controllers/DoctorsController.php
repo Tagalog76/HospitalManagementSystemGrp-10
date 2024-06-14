@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Doctors;
 use Illuminate\Http\Request;
+use App\Models\Records;
+
 
 class DoctorsController extends Controller
 {
@@ -17,7 +20,7 @@ class DoctorsController extends Controller
     }
 
     //for adding doctors
-    public function add(Request $request)
+    public function store(Request $request)
     {
         $request->validate([
             'first_name' => 'required|string|max:255',
@@ -38,9 +41,14 @@ class DoctorsController extends Controller
     }
 
     //for deleting doctors
-    public function delete($id)
+    public function destroy($id)
     {
-        Doctor::find($id)->delete();
+        Doctors::find($id)->delete();
         return response()->json(['message' => 'Doctor deleted successfully']);
+    }
+
+    public function records()
+    {
+        return $this->hasMany(Records::class);
     }
 }

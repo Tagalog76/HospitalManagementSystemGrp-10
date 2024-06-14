@@ -2,18 +2,18 @@
     namespace App\Http\Controllers;
 
     use Illuminate\Http\Request;
-    use App\Models\Appointment;
+    use App\Models\Appointments;
     
     class AppointmentsController extends Controller
     {
         public function index()
         {
-            return Appointment::all();
+            return Appointments::all();
         }
     
         public function show($id)
         {
-            return Appointment::find($id);
+            return Appointments::find($id);
         }
     
         public function store(Request $request)
@@ -25,19 +25,19 @@
                 'remarks' => 'nullable|string',
             ]);
     
-            return Appointment::create($request->all());
+            return Appointments::create($request->all());
         }
     
         public function update(Request $request, $id)
         {
-            $appointment = Appointment::findOrFail($id);
+            $appointment = Appointments::findOrFail($id);
             $appointment->update($request->all());
             return $appointment;
         }
     
         public function destroy($id)
         {
-            Appointment::find($id)->delete();
+            Appointments::find($id)->delete();
             return response()->json(['message' => 'Appointment deleted successfully']);
         }
     }

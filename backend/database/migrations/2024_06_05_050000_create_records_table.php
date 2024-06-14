@@ -15,7 +15,18 @@ return new class extends Migration
     {
         Schema::create('records', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('patient_id');
+            $table->unsignedBigInteger('doctor_id');
+            $table->date('visit_date');
+            $table->string('diagnosis');
+            $table->text('treatment');
+            $table->text('notes')->nullable();
             $table->timestamps();
+
+             // Foreign keys (assuming you have patients and doctors tables)
+            $table->foreign('patient_id')->references('patient_id')->on('patients')->onDelete('cascade');
+            $table->foreign('doctor_id')->references('doctor_id')->on('doctors')->onDelete('cascade');
+        
         });
     }
 

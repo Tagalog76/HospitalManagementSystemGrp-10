@@ -10,7 +10,7 @@ class UsersController extends Controller
     // Method to fetch all users
     public function index()
     {
-        $users = User::all();
+        $users = Users::all();
         return response()->json($users);
     }
 
@@ -26,7 +26,7 @@ class UsersController extends Controller
         ]);
 
         // Create new user
-        $user = User::create($validatedData);
+        $user = Users::create($validatedData);
 
         return response()->json($user, 201);
     }
@@ -34,7 +34,7 @@ class UsersController extends Controller
     // Method to fetch a single user
     public function show($id)
     {
-        $user = User::findOrFail($id);
+        $user = Users::findOrFail($id);
         return response()->json($user);
     }
 
@@ -50,7 +50,7 @@ class UsersController extends Controller
         ]);
 
         // Find the user
-        $user = User::findOrFail($id);
+        $user = Users::findOrFail($id);
 
         // Update user
         $user->update($validatedData);
@@ -61,7 +61,7 @@ class UsersController extends Controller
     // Method to delete a user
     public function destroy($id)
     {
-        $user = User::findOrFail($id);
+        $user = Users::findOrFail($id);
         $user->delete();
 
         return response()->json(null, 204);
