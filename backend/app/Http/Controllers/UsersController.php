@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Doctors;
+use App\Models\Patients;
 use Illuminate\Http\Request;
 use App\Models\Users; // Assuming you have a User model
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -17,18 +20,54 @@ class UsersController extends Controller
     // Method to create a new user
     public function store(Request $request)
     {
-        // Validate incoming request
-        $validatedData = $request->validate([
+        $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|unique:users|max:255',
-            'password' => 'required|string|min:6',
-            'role' => 'required|in:admin,doctor,patient',
+            'email' => 'required|email|unique:users,email',
+            'role' => 'required|in:admin,doctor,patient,receptionist',
+            'password' => 'required|string|min:6'
         ]);
 
-        // Create new user
-        $user = Users::create($validatedData);
+        $user = new Users();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->role = $request->role;
+        $user->password = Hash::make($request->password);
+        
+        // Save the user to the database
+        // $user->save();
+        if ($user->role == 'doctor') {
+            $nameParts = explode(' ', $user->name);
+            $doctor = new Doctors();
+            $doctor->user_id = $user->id; 
+            $doctor->first_name = $nameParts[0];
+            $doctor->last_name = isset($nameParts[1]) ? $nameParts[1] : '';
+            $doctor->specialization = ''; 
+            $doctor->license_number = ''; 
+            $doctor->phone = ''; 
+            $doctor->email = $user->email;
+            $doctor->created_at = now();
+            $doctor->updated_at = now();
+            $doctor->save();
+        }
+        else if ($user->role == 'patient') {
+            $nameParts = explode(' ', $user->name);
+            $patient = new Patients();
+            $patient->user_id = $user->id; 
+            $patient->first_name = $nameParts[0];
+            $patient->last_name = isset($nameParts[1]) ? $nameParts[1] : '';
+            $patient->date_of_birth = '2001-01-01'; 
+            $patient->gender = 'other'; 
+            $patient->address = ''; 
+            $patient->phone = '';
+            $patient->email = $user->email;
+            $patient->emergency_contact = ''; 
+            $patient->medical_history = '';
+            $patient->created_at = now();
+            $patient->updated_at = now();
+            $patient->save();
+        }
 
-        return response()->json($user, 201);
+        return response()->json(['message' => 'User added successfully', 'user' => $user]);
     }
 
     // Method to fetch a single user
@@ -41,21 +80,46 @@ class UsersController extends Controller
     // Method to update a user
     public function update(Request $request, $id)
     {
-        // Validate incoming request
-        $validatedData = $request->validate([
+        $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,'.$id,
-            'password' => 'required|string|min:6',
-            'role' => 'required|in:admin,doctor,patient',
+            'email' => 'required|email|unique:users,email,'.$id,
+            'role' => 'required|in:admin,doctor,receptionist,patient'
         ]);
 
-        // Find the user
         $user = Users::findOrFail($id);
+        $user->update($request->all());
 
-        // Update user
-        $user->update($validatedData);
-
-        return response()->json($user, 200);
+        if ($user->role == 'doctor') {
+            $nameParts = explode(' ', $user->name);
+            $doctor = new Doctors();
+            $doctor->user_id = $user->id; 
+            $doctor->first_name = $nameParts[0];
+            $doctor->last_name = isset($nameParts[1]) ? $nameParts[1] : '';
+            $doctor->specialization = ''; 
+            $doctor->license_number = ''; 
+            $doctor->phone = ''; 
+            $doctor->email = $user->email;
+            $doctor->created_at = now();
+            $doctor->updated_at = now();
+            $doctor->save();
+        }else if ($user->role == 'patient') {
+            $nameParts = explode(' ', $user->name);
+            $patient = new Patients();
+            $patient->user_id = $user->id;
+            $patient->first_name = $nameParts[0];
+            $patient->last_name = isset($nameParts[1]) ? $nameParts[1] : ' ';
+            $patient->date_of_birth = '2001-01-01'; 
+            $patient->gender = 'other'; 
+            $patient->address = ' '; 
+            $patient->phone = ' ';
+            $patient->email = $user->email;
+            $patient->emergency_contact = ' ';
+            $patient->medical_history = ' ';
+            $patient->created_at = now();
+            $patient->updated_at = now();
+            $patient->save();
+        }
+        return response()->json(['message' => 'User updated successfully', 'user' => $user]);
     }
 
     // Method to delete a user
@@ -63,7 +127,6 @@ class UsersController extends Controller
     {
         $user = Users::findOrFail($id);
         $user->delete();
-
-        return response()->json(null, 204);
+        return response()->json(['message' => 'User deleted successfully']);
     }
 }
