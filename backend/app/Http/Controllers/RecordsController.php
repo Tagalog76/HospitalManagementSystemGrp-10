@@ -27,16 +27,26 @@ class RecordsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'patient_id' => 'required|exists:patients,id',
-            'doctor_id' => 'required|exists:doctors,id',
+            'patient_id' => 'required|exists:patients,user_id',
+            'doctor_id' => 'required|exists:doctors,doctor_id',
             'visit_date' => 'required|date',
-            'diagnosis' => 'required|string|max:255',
+            'diagnosis' => 'required|string',
             'treatment' => 'required|string',
             'notes' => 'nullable|string',
         ]);
 
-        $record = Records::create($request->all());
-        return response()->json($record, 201);
+        $record = new Records([
+            'patient_id' => $request->patient_id,
+            'doctor_id' => $request->doctor_id,
+            'visit_date' => $request->visit_date,
+            'diagnosis' => $request->diagnosis,
+            'treatment' => $request->treatment,
+            'notes' => $request->notes,
+        ]);
+
+        $record->save();
+
+        return response()->json(['message' => 'Medical record added successfully'], 201);
     }
 
     /**
