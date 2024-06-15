@@ -1,7 +1,7 @@
 <?php
 
     namespace Database\Seeders;
-    use App\Models\Patient;
+    use App\Models\Patients;
     use Illuminate\Database\Seeder;
     use Illuminate\Support\Facades\DB;
 
@@ -36,7 +36,7 @@
             ];
 
             foreach ($patients as $patientData) {
-                Patient::create($patientData);
+                Patients::create($patientData);
             }
         }
     }

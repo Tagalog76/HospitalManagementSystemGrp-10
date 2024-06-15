@@ -1,7 +1,7 @@
 <?php
     namespace Database\Seeders;
     
-    use App\Models\Appointment;
+    use App\Models\Appointments;
     use Illuminate\Database\Seeder;
     use Illuminate\Support\Facades\DB;
 
@@ -28,7 +28,7 @@
 
             // Insert appointment data into the database
             foreach ($appointments as $appointmentData) {
-                Appointment::create($appointmentData);
+                Appointments::create($appointmentData);
             }
         }
     }
