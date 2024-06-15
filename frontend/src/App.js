@@ -1,39 +1,78 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Navbar } from './components/Navbar';
-import Home from './pages/Home';
-import Register from './components/Register';
 import Login from './components/Login';
-import AdminDashboard from './components/AdminDashboard';
-import DoctorDashboard from './components/DoctorDashboard';
-import PatientDashboard from './components/PatientDashboard';
-import ManagePatients from './pages/ManagePatients';
-import ManageDoctors from './pages/ManageDoctors';
-import BookAppointment from './pages/AppointmentBooking';
-import ViewAppointment from './pages/ViewAppointment';
-import ViewMedicalRecord from './pages/ViewMedicalRecord';
-import ViewAllAppointments from './pages/ViewAllAppointments';
+import AdminHomepage from './components/AdminHomepage';
+import NavBar from './components/NavBar';
+import Register from './components/Register';
+import ManageDoctors from './components/ManageDoctors';
+import ManagePatients from './components/ManagePatients';
+import './styles.css';
+import ProtectedRoute from './components/ProtectedRoute';
+import PatientHome from './components/PatientHome';
+import MedicalRecords from './components/MedicalRecords.js';
+import AppointmentPage from './components/AppointmentPage';
+import ReceptionistPage from './components/ReceptionistPage.js';
+import DoctorPage from './components/DoctorPage.js';
+import DoctorPatientList from './components/DoctorPatientList.js';
+import UserDoctorList from './components/UserDoctorList.js';
 
-const App = () => {
+function App() {
   return (
     <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/pages/Home" element={<Home />} />
-        <Route path="/components/Register" element={<Register />} />
-        <Route path="/components/Login" element={<Login />} />
-        <Route path="/components/AdminDashboard" element={<AdminDashboard />} />
-        <Route path="/components/DoctorDashboard" element={<DoctorDashboard />} />
-        <Route path="/components/PatientDashboard" element={<PatientDashboard />} />
-        <Route path="/pages/ManagePatients" element={<ManagePatients />} />
-        <Route path="/pages/ManageDoctors" element={<ManageDoctors />} />
-        <Route path="/pages/AppointmentBooking" element={<BookAppointment />} />
-        <Route path="/pages/ViewAppointment" element={<ViewAppointment />} />
-        <Route path="/pages/ViewMedicalRecord" element={<ViewMedicalRecord />} />
-        <Route path="/pages/ViewAllAppointments" element={<ViewAllAppointments />} />
-      </Routes>
+      <NavBar />
+      <div className="container mt-5">
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/admin" element={<ProtectedRoute role="admin">
+            <AdminHomepage />
+            </ProtectedRoute>
+          }/>
+          <Route path="/manage-doctors" element={
+              <ProtectedRoute role="admin">
+                <ManageDoctors />
+              </ProtectedRoute>}/>
+          <Route path="/manage-patients" element={
+              <ProtectedRoute role="admin">
+                <ManagePatients />
+              </ProtectedRoute>}/>
+          <Route path="/patient-home" element={
+              <ProtectedRoute role="patient">
+                <PatientHome />
+              </ProtectedRoute>}/>
+           <Route path="/patient-medical-history" element={
+            <ProtectedRoute role="patient">
+              <MedicalRecords />
+            </ProtectedRoute>}/>
+            <Route path="/patient-appointment" element={
+              <ProtectedRoute role="patient">
+                <AppointmentPage />
+              </ProtectedRoute>}/>
+            <Route path="/receptionist" element={
+            <ProtectedRoute role="receptionist">
+              <ReceptionistPage />
+            </ProtectedRoute>}/>
+            <Route path="/receptionist-manage-patients" element={
+            <ProtectedRoute role="receptionist">
+              <ManagePatients />
+            </ProtectedRoute>}/>
+            <Route path="/doctor-appointment" element={
+              <ProtectedRoute role="doctor">
+                <DoctorPage />
+              </ProtectedRoute>}/>
+              <Route path="/doctor-patients-list" element={
+              <ProtectedRoute role="doctor">
+                <DoctorPatientList />
+              </ProtectedRoute>}/>
+              <Route path="/user" element={
+              <ProtectedRoute role="user">
+                <UserDoctorList />
+              </ProtectedRoute>}/>
+        </Routes>
+      </div>
     </Router>
   );
-};
+}
 
 export default App;
