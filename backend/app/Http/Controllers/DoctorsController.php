@@ -9,6 +9,11 @@ use App\Models\Records;
 
 class DoctorsController extends Controller
 {
+    /**
+     * Display a listing of the records.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         return Doctors::all();
