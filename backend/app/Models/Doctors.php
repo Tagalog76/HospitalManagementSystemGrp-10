@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 class Doctors extends Model
 {
     use HasFactory;
@@ -18,4 +19,9 @@ class Doctors extends Model
         'phone',
         'email',
     ];
+
+    public function appointments()
+    {
+        return $this->hasMany(Appointments::class);
+    }
 }

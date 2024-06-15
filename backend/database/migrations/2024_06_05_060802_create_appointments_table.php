@@ -13,6 +13,7 @@ class CreateAppointmentsTable extends Migration
             $table->foreignId('patient_id')->references('patient_id')->on('patients');
             $table->foreignId('doctor_id')->references('doctor_id')->on('doctors');
             $table->dateTime('appointment_date');
+            $table->enum('status', ['pending', 'confirmed', 'completed', 'cancelled'])->default('scheduled');
             $table->text('remarks')->nullable();
             $table->timestamps();
         });
