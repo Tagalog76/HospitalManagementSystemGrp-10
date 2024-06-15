@@ -25,7 +25,7 @@ const ViewAllAppointments = () => {
       created_at: '2024-06-11T09:00:00Z',
       updated_at: '2024-06-16T15:00:00Z',
     },
-    // Add more sample appointments as needed
+   
   ];
 
   // Simulating fetching data from an API
