@@ -7,9 +7,8 @@ export const Navbar = () => {
         <li><Link to="/pages/Home">Home</Link></li>
         <li><Link to="/components/Register">Register</Link></li>
         <li><Link to="/components/Login">Login</Link></li>
-        <li><Link to="/components/AdminDashboard">AdminDashboard</Link></li>
-        <li><Link to="/components/DoctorDashboard">DoctorDashboard</Link></li>
         <li><Link to="/components/PatientDashboard">PatientDashboard</Link></li>
+        <li><Link to="/components/DoctorDashboard">DoctorDashboard</Link></li>
       </ul>
     </nav>
   );

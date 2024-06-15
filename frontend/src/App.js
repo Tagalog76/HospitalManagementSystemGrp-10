@@ -9,8 +9,10 @@ import DoctorDashboard from './components/DoctorDashboard';
 import PatientDashboard from './components/PatientDashboard';
 import ManagePatients from './pages/ManagePatients';
 import ManageDoctors from './pages/ManageDoctors';
-import BookAppointment from './pages/BookAppointment';
-import ViewAppointments from './pages/ViewAppointment';
+import BookAppointment from './pages/AppointmentBooking';
+import ViewAppointment from './pages/ViewAppointment';
+import ViewMedicalRecord from './pages/ViewMedicalRecord';
+import ViewAllAppointments from './pages/ViewAllAppointments';
 
 const App = () => {
   return (
@@ -25,8 +27,10 @@ const App = () => {
         <Route path="/components/PatientDashboard" element={<PatientDashboard />} />
         <Route path="/pages/ManagePatients" element={<ManagePatients />} />
         <Route path="/pages/ManageDoctors" element={<ManageDoctors />} />
-        <Route path="/pages/BookAppointment" element={<BookAppointment />} />
-        <Route path="/pages/ViewAppointments" element={<ViewAppointments />} />
+        <Route path="/pages/AppointmentBooking" element={<BookAppointment />} />
+        <Route path="/pages/ViewAppointment" element={<ViewAppointment />} />
+        <Route path="/pages/ViewMedicalRecord" element={<ViewMedicalRecord />} />
+        <Route path="/pages/ViewAllAppointments" element={<ViewAllAppointments />} />
       </Routes>
     </Router>
   );

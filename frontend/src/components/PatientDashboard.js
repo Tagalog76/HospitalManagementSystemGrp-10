@@ -6,8 +6,9 @@ const PatientDashboard = () => {
     <div>
       <h2>Patient Dashboard</h2>
       <ul>
-        <li><Link to="/pages/BookAppointment">Book Appointment</Link></li>
-        <li><Link to="/pages/VewAppointments">View Appointments</Link></li>
+        <li><Link to="/pages/ViewMedicalRecord">View Medical Record</Link></li>
+        <li><Link to="/pages/AppointmentBooking">Book Appointment</Link></li>
+        <li><Link to="/pages/ViewAppointment">View Appointment</Link></li>  
       </ul>
     </div>
   );
